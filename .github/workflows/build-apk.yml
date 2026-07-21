@@ -12,12 +12,15 @@ jobs:
       - name: Descargar el código
         uses: actions/checkout@v4
 
-      - name: Descomprimir virtlab_flutter.zip si lo subiste tal cual
+      - name: Acomodar el proyecto en la raíz
         run: |
           if [ -f "virtlab_flutter.zip" ]; then
             unzip -o virtlab_flutter.zip -d _extracted
             cp -r _extracted/virtlab_flutter/. .
             rm -rf _extracted virtlab_flutter.zip
+          elif [ -d "virtlab_flutter" ]; then
+            cp -r virtlab_flutter/. .
+            rm -rf virtlab_flutter
           fi
 
       - name: Instalar Flutter
